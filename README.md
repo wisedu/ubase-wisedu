@@ -19,6 +19,7 @@ ubase({
 ```
 
 －－ubase配置项
+
 | 名称  | 描述 | 类型 | 默认值 | 备注 |
 | ---    | ---   | ---   | ---     | ---   |
 | autoImportVueComponent | 是否自动加载vue组件（应用目录及components目录） | Boolean | true | |
