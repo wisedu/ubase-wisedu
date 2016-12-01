@@ -17,6 +17,18 @@ ubase({
  });
 
 ```
+－－ubase配置项
+
+| 名称  | 描述 | 类型 | 默认值 | 备注 |
+| ---    | ---   | ---   | ---     | ---   |
+| autoImportVueComponent | 是否自动加载vue组件（应用目录及components目录） | Boolean | true | |
+| alias | 配置别名 | Object | -- |  |
+| langs | 支持的语言列表 | Array | ['cn'] | 此处列出的语言，需要在各个.i18n.js文件中export出来 |
+| dest | 输出路径 | String | './www' |  |
+| port | 端口 | string | '8081' |  |
+| proxy | 代理 | Array | -- | { source: '/jcsj-apps-web', target: 'http://res.wisedu.com:8000' } |
+| useConfigFile | 是否使用独立config文件 | Boolean | false | 如果配置信息希望在单独的文件中，该属性设置为true， 并在index.html的同级目录添加config.json文件即可 |
+
 
 3、运行
 
@@ -29,19 +41,6 @@ $ gulp --debug
 ```bash
 $ gulp --production
 ```
-
-
-－－ubase配置项
-
-| 名称  | 描述 | 类型 | 默认值 | 备注 |
-| ---    | ---   | ---   | ---     | ---   |
-| autoImportVueComponent | 是否自动加载vue组件（应用目录及components目录） | Boolean | true | |
-| alias | 配置别名 | Object | -- |  |
-| langs | 支持的语言列表 | Array | ['cn'] | 此处列出的语言，需要在各个.i18n.js文件中export出来 |
-| dest | 输出路径 | String | './www' |  |
-| port | 端口 | string | '8081' |  |
-| proxy | 代理 | Array | -- | { source: '/jcsj-apps-web', target: 'http://res.wisedu.com:8000' } |
-| useConfigFile | 是否使用独立config文件 | Boolean | false | 如果配置信息希望在单独的文件中，该属性设置为true， 并在index.html的同级目录添加config.json文件即可 |
 
 ## 项目目录结构
 #### 单app模式
