@@ -18,6 +18,19 @@ ubase({
 
 ```
 
+3、运行
+
+#### dev
+```bash
+$ gulp --debug
+```
+
+#### production
+```bash
+$ gulp --production
+```
+
+
 －－ubase配置项
 
 | 名称  | 描述 | 类型 | 默认值 | 备注 |
@@ -31,7 +44,7 @@ ubase({
 | useConfigFile | 是否使用独立config文件 | Boolean | false | 如果配置信息希望在单独的文件中，该属性设置为true， 并在index.html的同级目录添加config.json文件即可 |
 
 ## 项目目录结构
-### 单app模式
+#### 单app模式
 ```
 src/
 ├── components/
@@ -49,7 +62,7 @@ src/
     ├── images/
     └── ...
 ```
-### 多app模式
+#### 多app模式
 ```
 src/
 ├── components/
