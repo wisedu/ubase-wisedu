@@ -30,6 +30,46 @@ ubase({
 | proxy | 代理 | Array | -- | { source: '/jcsj-apps-web', target: 'http://res.wisedu.com:8000' } |
 | useConfigFile | 是否使用独立config文件 | Boolean | false | 如果配置信息希望在单独的文件中，该属性设置为true， 并在index.html的同级目录添加config.json文件即可 |
 
+## 项目目录结构
+### 单app模式
+```
+src/
+├── components/
+├── pages/
+│   ├── page1
+│   │   ├── page1.i18n.js // 国际化文件
+│   │   ├── pag1.vue // 主文件
+│   │   ├── page1.service.js //service
+│   │   └──page1.vuex.js // 状态文件
+│   ├── index.html  // 必须
+│   ├── routes.js  // 必须
+│   ├── config.json  // 必须
+│   └── ...
+└── statics/
+    ├── images/
+    └── ...
+```
+### 多app模式
+```
+src/
+├── components/
+├── pages/
+│   ├── app1
+│   │   ├── index.html
+│   │   ├── routes.js
+│   │   ├── config.json
+│   │   └── ...
+│   ├── app2
+│   │    ├── index.html
+│   │    ├── routes.js
+│   │    ├── config.json
+│   │    └── ...
+│   ├── base.i18n.js // 多app共享国际化文件
+│   └── ...
+└── statics/
+    ├── images/
+    └── ...
+```
 
 ### 国际化
 自动识别， 如果有.i18n.js文件，则添加国际化功能
