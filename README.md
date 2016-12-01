@@ -133,3 +133,144 @@ Ubase.updateState('vuex', {'info.name': '小明'})
 
 其中vuex为.vuex.js的前缀，表示要更新哪个vuex下的状态
 例如：如果要更新page1.vuex.js中的状态{info:{name:'zhangsan'}}，则Ubase.upateState('page1', {'info.name': 'xiaoming'})
+
+
+## 支持弹框类型(6种)
+
+### 纸质弹框
+
+#### 调用方式
+* 打开
+```
+Utils.paperDialog({
+    title: "编辑"
+    currentView: 'addOrEdit'
+});
+```
+* 手动隐藏
+```
+Utils.paperDialog('hide')
+```
+
+#### Properties
+
+| 名称  | 描述 | 类型 | 默认值 | 备注 |
+| ---    | ---   | ---   | ---     | ---   |
+| currentView | 组件名称 | String | '' | 纸质弹框中需要显示的vue组件名称（框架通过动态组件加载）|
+| title | 弹框标题 | String | -- | 如果动态组件中未设置h2标题，则弹框的标题为该title |
+
+### 属性弹框
+
+#### 调用方式
+* 打开
+```
+Utils.propertyDialog({
+    currentView: 'departCategoryAddOrEdit',
+    okEvent: 'moduleName.methodName',
+    title: Vue.t('departCategory.propertyDialog.edit_title'),
+    footerShow: false
+})
+```
+* 手动隐藏
+```
+Utils.propertyDialog('hide')
+```
+
+#### Properties
+
+| 名称  | 描述 | 类型 | 默认值 | 备注 |
+| ---    | ---   | ---   | ---     | ---   |
+| currentView | 组件名称 | String | -- | 弹框中需要显示的vue组件名称（框架通过动态组件加载）|
+| title | 弹框标题 | String | -- | 如果动态组件中未设置h2标题，则弹框的标题为该title |
+| footerShow | 是否显示底部按钮 | true | -- | 底部按钮区域是否显示 |
+| okEvent | 确定按钮事件 | Function | -- | 底部确定按钮事件，'.'前面是.vue文件的名称，'.'后面是该vue文件内methods下面的方法 |
+
+### 对话框
+* 打开
+```
+Utils.dialog({
+    currentView: 'departCategoryAddOrEdit',
+    title: Vue.t('departCategory.propertyDialog.edit_title'),
+    width: '400px',
+    height: '500px'
+})
+```
+* 手动隐藏
+```
+Utils.dialog('hide')
+```
+
+#### Properties
+
+| 名称  | 描述 | 类型 | 默认值 | 备注 |
+| ---    | ---   | ---   | ---     | ---   |
+| currentView | 组件名称 | String | -- | 对话框中需要显示的vue组件名称（框架通过动态组件加载）|
+| title | 弹框标题 | String | -- | 如果动态组件中未设置h2标题，则弹框的标题为该title |
+| width | 宽度 | String | '500px' | 对话框宽度 |
+| height | 高度 | String | '600px' | 对话框高度 |
+| buttons | 自定义按钮组 | Array | -- | [{text: '确定',className: 'bh-btn-primary',callback: callback}] |
+
+
+### tip弹框
+* 打开
+```
+Utils.tip({
+    content: '保存成功！',
+    state: 'success',
+})
+```
+
+#### Properties
+
+| 名称  | 描述 | 类型 | 默认值 | 备注 |
+| ---    | ---   | ---   | ---     | ---   |
+| content | 提示内容 | String | '' | |
+| state | 提示类型 | String | -- | 可选值：primary, success, warning, danger, loading  |
+| hideWaitTime | 自定义停留时间 | Integer | 5000 |  |
+| iconClass | 自定义图标提示 | String | -- | 可选 |
+| onClosed | 提示关闭的回调 | Function | -- |  |
+
+
+### toast弹框
+* 打开
+```
+Utils.toast({
+    type: 'warning',
+    title: '确定删除吗？',
+    content: '删除后数据将无法恢复？',
+    okEvent: 'moduleName.methodName'
+})
+```
+
+#### Properties
+
+| 名称  | 描述 | 类型 | 默认值 | 备注 |
+| ---    | ---   | ---   | ---     | ---   |
+| title | 提示标题 | String | -- |   |
+| content | 弹框内容 | String | -- | |
+| type | 弹框类型 | String | -- | 可选值：success, warning, danger |
+| okEvent | 确定按钮事件 | Function | -- | '.'前面是.vue文件的名称，'.'后面是该vue文件内methods下面的方法 |
+| okText | 确定按钮文字 | String | 确定 | |
+| cancelEvent | 取消按钮事件 | Function | -- |  |
+| cancelText | 取消按钮文字 | String | 取消 |  |
+
+
+### pop弹框
+* 打开
+```
+Utils.pop({
+    selector: event.currentTarget
+    currentView: 'departCategoryAddOrEdit',
+    width:'500px',
+    height:'400px'
+})
+```
+
+#### Properties
+
+| 名称  | 描述 | 类型 | 默认值 | 备注 |
+| ---    | ---   | ---   | ---     | ---   |
+| title | 提示标题 | String | -- |   |
+| currentView |组件名称 | String | -- | 对话框中需要显示的vue组件名称（框架通过动态组件加载）|
+| width | 宽度 | String | -- | 对话框宽度 |
+| height | 高度 | String | --' | 对话框高度 |
