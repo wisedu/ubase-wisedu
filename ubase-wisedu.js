@@ -10,10 +10,11 @@
   window.Utils = {}
 
   window.Ubase.beforeInit = function (transition) {
-    showLoading()
 
     gConfig = transition.config
     gRouter = transition.router
+
+    gConfig['BH_VERSION'] = gConfig['BH_VERSION'] || '1.2'
 
     if (gConfig['APP_ID']) {
       $.ajax({
@@ -115,29 +116,27 @@
   Vue.mixin({
     ready: function () {
       var self = this
-      var vuex = this.$options.vuex
-      if (vuex && vuex.getters) {
+      var componentName = this.$options._ubase_component_name
+      if (componentName) {
         var $body = $('body')
         setContentMinHeight($body.children('main').children('article'))
         hideLoading()
-      }
 
-      if(!this.$options._ubase_component_name){
-        return
-      }
-
-      // emapcard的事件綁定
-      $(this.$el).on('click', '.card-opt-button', function (e) {
-        var row = $(this).data('row');
-        var event = $(this).attr('data-event');
-        if (row && event) {
-          if (event.indexOf('.')) {
-            Ubase.invoke(event, row)
-          } else {
-            self.$emit(event, row);
-          }
+        if(this.$options.template && this.$options.template.indexOf('emap-card') > 0){
+          // emapcard的事件綁定
+          $(this.$el).on('click', '.card-opt-button', function (e) {
+            var row = $(this).data('row');
+            var event = $(this).attr('data-event');
+            if (row && event) {
+              if (event.indexOf('.')) {
+                Ubase.invoke(event, row)
+              } else {
+                self.$emit(event, row);
+              }
+            }
+          })
         }
-      })
+      }
     }
   })
 
