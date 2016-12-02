@@ -122,7 +122,7 @@
         setContentMinHeight($body.children('main').children('article'))
         hideLoading()
 
-        if(this.$options.template && this.$options.template.indexOf('emap-card') > 0){
+        if(this.$options.template && (this.$options.template.indexOf('emap-card') > 0 || this.$options.template.indexOf('emap-grid') > 0)){
           // emapcard的事件綁定
           $(this.$el).on('click', '.card-opt-button', function (e) {
             var row = $(this).data('row');
