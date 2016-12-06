@@ -415,10 +415,9 @@
   }
 
   function toast(options, type) {
-
-    // deprecated
-    if (options._uid && options._unlinkFn) {
-      options = options.pageopt.toast[type]
+    if (options === 'hide') {
+      $('.bh-bhdialog-container').remove()
+      return
     }
 
     // 如果没有指定buttons则设置默认
