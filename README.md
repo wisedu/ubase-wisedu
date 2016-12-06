@@ -209,6 +209,7 @@ Utils.dialog('hide')
 | width | 宽度 | String | '500px' | 对话框宽度 |
 | height | 高度 | String | '600px' | 对话框高度 |
 | buttons | 自定义按钮组 | Array | -- | [{text: '确定',className: 'bh-btn-primary',callback: callback}] |
+| okEvent | 确定按钮事件 | Function | -- | 底部确定按钮事件，'.'前面是.vue文件的名称，'.'后面是该vue文件内methods下面的方法 |
 
 
 ### tip弹框
