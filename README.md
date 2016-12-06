@@ -242,6 +242,10 @@ Utils.toast({
     okEvent: 'moduleName.methodName'
 })
 ```
+* 手动隐藏
+```
+Utils.toast('hide')
+```
 
 #### Properties
 
@@ -265,6 +269,10 @@ Utils.pop({
     width:'500px',
     height:'400px'
 })
+```
+* 手动隐藏
+```
+Utils.pop('hide')
 ```
 
 #### Properties
