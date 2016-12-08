@@ -652,4 +652,34 @@
     }
   }
 
+  // vue-resource v1.0.3 中才做下面配置
+  Vue.http.options.jsonp || Vue.http.interceptors.push(function (request, next) {
+    next(function (response) {
+      var body = response.body
+      if(body && body.code !== '0' && body.code !== 0 && body.code !== 200){
+        Utils.tip({
+          state: 'danger',
+          content: body.message || '系统错误'
+        })
+      }
+    });
+  })
+
+    // vue-resource 0.＊版做下面配置
+   Vue.http.options.jsonp && Vue.http.interceptors.push({
+       request:function(request) {
+           return request
+       },
+       response:function(response) {
+           var body = response.data
+           if(body && body.code !== '0' && body.code !== 0 && body.code !== 200){
+               Utils.tip({
+                   state: 'danger',
+                   content: body.message || '系统错误'
+               })
+           }
+           return response
+       }
+   })
+
 })()
