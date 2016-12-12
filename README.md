@@ -147,9 +147,9 @@ Utils.paperDialog({
     currentView: 'addOrEdit'
 });
 ```
-* 手动隐藏
+* 关闭
 ```
-Utils.paperDialog('hide')
+Utils.paperDialog('close')
 ```
 
 #### Properties
@@ -171,9 +171,9 @@ Utils.propertyDialog({
     footerShow: false
 })
 ```
-* 手动隐藏
+* 关闭
 ```
-Utils.propertyDialog('hide')
+Utils.propertyDialog('close')
 ```
 
 #### Properties
@@ -195,9 +195,9 @@ Utils.dialog({
     height: '500px'
 })
 ```
-* 手动隐藏
+* 关闭
 ```
-Utils.dialog('hide')
+Utils.dialog('close')
 ```
 
 #### Properties
@@ -242,9 +242,9 @@ Utils.toast({
     okEvent: 'moduleName.methodName'
 })
 ```
-* 手动隐藏
+* 关闭
 ```
-Utils.toast('hide')
+Utils.toast('close')
 ```
 
 #### Properties
@@ -270,9 +270,9 @@ Utils.pop({
     height:'400px'
 })
 ```
-* 手动隐藏
+* 关闭
 ```
-Utils.pop('hide')
+Utils.pop('close')
 ```
 
 #### Properties
