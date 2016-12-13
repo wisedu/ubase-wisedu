@@ -101,7 +101,8 @@
                 gConfig['DEBUG'] === true ? '/fe_components/emap{{version}}.js' : '/fe_components/emap{{version}}.min.js',
                 '/fe_components/amp/ampPlugins.min.js',
                 '/fe_components/jqwidget/globalize.js',
-                '/bower_components/jquery.nicescroll/jquery.nicescroll.min.js'
+                '/bower_components/jquery.nicescroll/jquery.nicescroll.min.js',
+                '/bower_components/moment/min/moment-with-locales.min.js'
             ],
 
             'PUBLIC_NORMAL_JS': [
@@ -593,9 +594,10 @@
             return false
         }
         var win = BH_UTILS.bhWindow(content, title, btns, params, callback)
-        Vue.nextTick(function () {
+        win.on('open', function () {
             gRouter.app.$compile(win[0])
         })
+
         return win
     }
 
