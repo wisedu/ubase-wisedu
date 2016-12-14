@@ -593,9 +593,12 @@
             }
             return false
         }
-        var win = BH_UTILS.bhWindow(content, title, btns, params, callback)
+        var win = BH_UTILS.bhWindow(content, title, btns, params, typeof options.okEvent == 'function' ? options.okEvent : callback)
         win.on('open', function () {
             gRouter.app.$compile(win[0])
+            Vue.nextTick(function () {
+                options.afterRendered && options.afterRendered()
+            })
         })
 
         return win

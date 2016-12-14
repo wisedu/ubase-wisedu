@@ -209,7 +209,8 @@ Utils.dialog('close')
 | width | 宽度 | String | '500px' | 对话框宽度 |
 | height | 高度 | String | '600px' | 对话框高度 |
 | buttons | 自定义按钮组 | Array | -- | [{text: '确定',className: 'bh-btn-primary',callback: callback}] |
-| okEvent | 确定按钮事件 | Function | -- | 底部确定按钮事件，'.'前面是.vue文件的名称，'.'后面是该vue文件内methods下面的方法 |
+| okEvent | 确定按钮事件 | Function / String | -- | 底部确定按钮事件，函数 或者 '.'前面是.vue文件的名称，'.'后面是该vue文件内methods下面的方法 |
+| afterRendered | 页面渲染完执行的回调 | Function | -- | 弹框内页面渲染结束后执行的回调 |
 
 
 ### tip弹框
