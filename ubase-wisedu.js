@@ -425,7 +425,7 @@
         if (!options.buttons && (options.okText || options.okEvent || options.cancelText || options.cancelEvent)) {
             options.buttons = [{
                 text: options.okText || '确认',
-                callback: function (e) {
+                callback: typeof options.okEvent == 'function' ? options.okEvent : function (e) {
                     if (options.okEvent && options.okEvent.indexOf('.') > 0) {
                         Ubase.invoke(options.okEvent)
                     }
@@ -437,7 +437,7 @@
                 }
             }, {
                 text: options.cancelText || '取消',
-                callback: function (e) {
+                callback: typeof options.okEvent == 'function' ? options.okEvent :function (e) {
                     if (options.cancelEvent && options.cancelEvent.indexOf('.') > 0) {
                         Ubase.invoke(options.cancelEvent)
                     }
