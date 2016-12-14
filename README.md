@@ -255,10 +255,11 @@ Utils.toast('close')
 | title | 提示标题 | String | -- |   |
 | content | 弹框内容 | String | -- | |
 | type | 弹框类型 | String | -- | 可选值：success, warning, danger |
-| okEvent | 确定按钮事件 | Function | -- | '.'前面是.vue文件的名称，'.'后面是该vue文件内methods下面的方法 |
+| okEvent | 确定按钮事件 | Function ／ String | -- | 函数或者方法调用字符串（'.'前面是.vue文件的名称，'.'后面是该vue文件内methods下面的方法） |
 | okText | 确定按钮文字 | String | 确定 | |
-| cancelEvent | 取消按钮事件 | Function | -- |  |
+| cancelEvent | 取消按钮事件 | Function ／ String | -- | 函数或者方法调用字符串（'.'前面是.vue文件的名称，'.'后面是该vue文件内methods下面的方法） |
 | cancelText | 取消按钮文字 | String | 取消 |  |
+| buttons | 自定义按钮组 | Array | -- | [{text: '确定',className: 'bh-btn-primary',callback: callback}] |
 
 
 ### pop弹框
