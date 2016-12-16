@@ -9,14 +9,24 @@ npm i ubase-vue --save --registry=https://registry.npm.taobao.org --sass-binary-
 
 2、gulpfile.js
 ```
-var ubase = require('ubase-vue');
+import path from 'path';
+import ubase from 'ubase-vue';
 
 ubase({
-   dest: './www',
-   port: '8081'
- });
-
+    // 配置别名
+    alias: {
+      'components': path.resolve(__dirname, './src/components'),
+      'statics': path.resolve(__dirname, './src/statics')
+    },
+    
+    // 端口
+    port: '8081',
+    
+    // mock server代理
+    proxy: [{ source: '/yxxzry-apps-web', target: 'http://res.wisedu.com:8000' }]
+});
 ```
+
 －－ubase配置项
 
 | 名称  | 描述 | 类型 | 默认值 | 备注 |
