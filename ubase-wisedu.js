@@ -22,7 +22,7 @@
                 contentType: 'application/json',
                 data: {appId: gConfig['APP_ID']},
                 async: false,
-                url: '/portal/portal/appFrameInfo'
+                url: '/portal/appFrameInfo'
             }).done(function (res) {
                 var serverConfig = null
                 if (res.code == 0) {
@@ -437,7 +437,7 @@
                 }
             }, {
                 text: options.cancelText || '取消',
-                callback: typeof options.okEvent == 'function' ? options.okEvent :function (e) {
+                callback: typeof options.cancelEvent == 'function' ? options.cancelEvent :function (e) {
                     if (options.cancelEvent && options.cancelEvent.indexOf('.') > 0) {
                         Ubase.invoke(options.cancelEvent)
                     }
