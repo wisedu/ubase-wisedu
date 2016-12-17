@@ -215,6 +215,7 @@ Utils.dialog('close')
 | 名称  | 描述 | 类型 | 默认值 | 备注 |
 | ---    | ---   | ---   | ---     | ---   |
 | currentView | 组件名称 | String | -- | 对话框中需要显示的vue组件名称（框架通过动态组件加载）|
+| content | html | String | -- | currentView和content二选一 |
 | title | 弹框标题 | String | -- | 如果动态组件中未设置h2标题，则弹框的标题为该title |
 | width | 宽度 | String | '500px' | 对话框宽度 |
 | height | 高度 | String | '600px' | 对话框高度 |
@@ -293,5 +294,6 @@ Utils.pop('close')
 | ---    | ---   | ---   | ---     | ---   |
 | title | 提示标题 | String | -- |   |
 | currentView |组件名称 | String | -- | 对话框中需要显示的vue组件名称（框架通过动态组件加载）|
+| content | html | String | -- | currentView和content二选一 |
 | width | 宽度 | String | -- | 对话框宽度 |
 | height | 高度 | String | --' | 对话框高度 |
