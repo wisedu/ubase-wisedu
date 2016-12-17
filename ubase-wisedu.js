@@ -548,7 +548,7 @@
         gRouter.app.ubaseDialog = options
         var params = options.params || {}
         var title = options.title,
-            content = '<component :is="ubaseDialog.currentView" v-ref:ubase_dialog></component>',
+            content = options.content || '<component :is="ubaseDialog.currentView" v-ref:ubase_dialog></component>',
             btns = options.buttons || options.btns
 
         if (btns && typeof btns === 'object') {
@@ -615,7 +615,7 @@
 
         gRouter.app.popDialog = options
         var userClose = options.close
-        options.content = '<component :is="popDialog.currentView" v-ref:pop_dialog></component>'
+        options.content = options.content || '<component :is="popDialog.currentView" v-ref:pop_dialog></component>'
         options.close = function (a, b, c) {
             dialogRef = gRouter.app.$refs.pop_dialog
             dialogRef && dialogRef.$destroy(false, true)
