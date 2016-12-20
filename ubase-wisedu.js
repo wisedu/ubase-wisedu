@@ -632,21 +632,7 @@
         $.bhPaperPileDialog.resetDialogFooter()
     }
 
-    function post(url, body) {
-        var p = new Vue.Promise(function (resolve, reject) {
-            Vue.http.post(url, body).then(function (res) {
-                if (res.code !== '0' && res.code !== 0 && res.code !== 200) {
-                    resolve(res.body)
-                } else {
-                    reject(res.body)
-                }
-            }, function () {
-                reject({code: '99999999', message: '网络错误'})
-            })
-        })
 
-        return p.promise
-    }
 
     // deprecated
     Vue.paperDialog = paperDialog
@@ -665,10 +651,26 @@
     window.Utils.dialog = dialog
     window.Utils.pop = pop
     window.Utils.resetFooter = resetFooter
-    window.Utils.post = post
-
 
     /* =================/弹框类组件vue全局封装===================== */
+
+    function post(url, body) {
+        var p = new Vue.Promise(function (resolve, reject) {
+            Vue.http.post(url, body).then(function (res) {
+                if (res.code !== '0' && res.code !== 0 && res.code !== 200) {
+                    resolve(res.body)
+                } else {
+                    reject(res.body)
+                }
+            }, function () {
+                reject({code: '99999999', message: '网络错误'})
+            })
+        })
+
+        return p.promise
+    }
+
+    window.Utils.post = post
 
 
     // jquery ajax setting
