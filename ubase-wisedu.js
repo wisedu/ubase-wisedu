@@ -437,7 +437,7 @@
                 }
             }, {
                 text: options.cancelText || '取消',
-                callback: typeof options.cancelEvent == 'function' ? options.cancelEvent :function (e) {
+                callback: typeof options.cancelEvent == 'function' ? options.cancelEvent : function (e) {
                     if (options.cancelEvent && options.cancelEvent.indexOf('.') > 0) {
                         Ubase.invoke(options.cancelEvent)
                     }
@@ -632,6 +632,22 @@
         $.bhPaperPileDialog.resetDialogFooter()
     }
 
+    function post(url, body) {
+        var p = new Vue.Promise(function (resolve, reject) {
+            Vue.http.post(url, body).then(function (res) {
+                if (res.code !== '0' && res.code !== 0 && res.code !== 200) {
+                    resolve(res.body)
+                } else {
+                    reject(res.body)
+                }
+            }, function () {
+                reject({code: '99999999', message: '网络错误'})
+            })
+        })
+
+        return p.promise
+    }
+
     // deprecated
     Vue.paperDialog = paperDialog
     Vue.propertyDialog = propertyDialog
@@ -649,6 +665,7 @@
     window.Utils.dialog = dialog
     window.Utils.pop = pop
     window.Utils.resetFooter = resetFooter
+    window.Utils.post = post
 
 
     /* =================/弹框类组件vue全局封装===================== */
@@ -672,7 +689,7 @@
         }
     }
 
-    // vue-resource v1.0.3 中才做下面配置
+    /*// vue-resource v1.0.3 中才做下面配置
     Vue.http.options.jsonp || Vue.http.interceptors.push(function (request, next) {
         next(function (response) {
             var body = response.body
@@ -700,6 +717,6 @@
             }
             return response
         }
-    })
+    })*/
 
 })()
