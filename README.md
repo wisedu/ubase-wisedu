@@ -144,6 +144,12 @@ Ubase.updateState('vuex', {'info.name': '小明'})
 其中vuex为.vuex.js的前缀，表示要更新哪个vuex下的状态
 例如：如果要更新page1.vuex.js中的状态{info:{name:'zhangsan'}}，则Ubase.upateState('page1', {'info.name': 'xiaoming'})
 
+## config.json配置项
+| 名称  | 描述 | 类型 | 默认值 | 备注 |
+| ---    | ---   | ---   | ---     | ---   |
+| DEBUG | 调试模式 | Boolean | false | 开启后，在console输出日志，bh.js和emap.js可以查看源码  |
+| APP_NAME | 应用名称 | String | -- |  |
+| LANG | 国际化 | String | 'cn' |  |
 
 ## 支持弹框类型(6种)
 
@@ -295,8 +301,8 @@ Utils.pop('close')
 | title | 提示标题 | String | -- |   |
 | currentView |组件名称 | String | -- | 对话框中需要显示的vue组件名称（框架通过动态组件加载）|
 | content | html | String | -- | currentView和content二选一 |
-| width | 宽度 | String | -- | 对话框宽度 |
-| height | 高度 | String | -- | 对话框高度 |
+| width | 弹框宽度 | String | -- |  |
+| height | 弹框高度 | String | -- |  |
 | autoClose | 点击页面其他区域popover是否自动关闭 | Boolean | -- |  |
 | showCloseButton | 是否显示关闭按钮 | Boolean | -- |  |
 | isModal | 是否有模态遮罩层 | Boolean | -- |  |
