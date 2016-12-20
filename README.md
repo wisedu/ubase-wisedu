@@ -296,4 +296,10 @@ Utils.pop('close')
 | currentView |组件名称 | String | -- | 对话框中需要显示的vue组件名称（框架通过动态组件加载）|
 | content | html | String | -- | currentView和content二选一 |
 | width | 宽度 | String | -- | 对话框宽度 |
-| height | 高度 | String | --' | 对话框高度 |
+| height | 高度 | String | -- | 对话框高度 |
+| autoClose | 点击页面其他区域popover是否自动关闭 | Boolean | -- |  |
+| showCloseButton | 是否显示关闭按钮 | Boolean | -- |  |
+| isModal | 是否有模态遮罩层 | Boolean | -- |  |
+| ready | 弹出成功回调 | Function | -- |  |
+| beforeClose | 关闭之前的回调 | Function | -- |  |
+| close | 关闭的回调 | Function | -- |  |
