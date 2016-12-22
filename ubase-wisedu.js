@@ -1,15 +1,32 @@
 (function () {
     var gCurrentRoute = null
     var gRouter = null
-    var showLoading = window.Ubase.showLoading
-    var hideLoading = window.Ubase.hideLoading
     var gConfig = null
     var gRoutes = []
     var gResource = null
 
     window.Utils = {}
 
+    /* =================APP loading动画===================== */
+    var loadingCss = '.app-ajax-loading .bh-loader-icon-line-border{border: 0px solid #ddd;box-shadow:none;}.app-ajax-loading{position:fixed;z-index:30000;}.app-loading{position:fixed;opacity:0;top:150px;left:-75px;margin-left:50%;z-index:-1;text-align:center}.app-loading-show{z-index:9999;animation:fade-in;animation-duration:0.5s;-webkit-animation:fade-in 0.5s;opacity:1;}@keyframes fade-in{0%{opacity:0}50%{opacity:.4}100%{opacity:1}}@-webkit-keyframes fade-in{0%{opacity:0}50%{opacity:.4}100%{opacity:1}}.spinner>div{width:30px;height:30px;background-color:#4DAAF5;border-radius:100%;display:inline-block;-webkit-animation:bouncedelay 1.4s infinite ease-in-out;animation:bouncedelay 1.4s infinite ease-in-out;-webkit-animation-fill-mode:both;animation-fill-mode:both}.spinner .bounce1{-webkit-animation-delay:-.32s;animation-delay:-.32s}.spinner .bounce2{-webkit-animation-delay:-.16s;animation-delay:-.16s}@-webkit-keyframes bouncedelay{0%,100%,80%{-webkit-transform:scale(0)}40%{-webkit-transform:scale(1)}}@keyframes bouncedelay{0%,100%,80%{transform:scale(0);-webkit-transform:scale(0)}40%{transform:scale(1);-webkit-transform:scale(1)}}'
+
+    var style = document.createElement('style')
+    style.innerText = loadingCss
+    document.getElementsByTagName('head')[0].appendChild(style)
+    $('body').append('  <div class="app-ajax-loading" style="position:fixed;z-index:30000;background-color:rgba(0,0,0,0);"></div><div class="app-loading"><div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div>')
+
+    function showLoading() {
+        $('.app-loading').addClass('app-loading-show')
+    }
+
+    function hideLoading() {
+        $('.app-loading').removeClass('app-loading-show')
+    }
+    /* =================/APP loading动画===================== */
+
     window.Ubase.beforeInit = function (transition) {
+
+        showLoading()
 
         gConfig = transition.config
         gRouter = transition.router
@@ -633,7 +650,6 @@
     }
 
 
-
     // deprecated
     Vue.paperDialog = paperDialog
     Vue.propertyDialog = propertyDialog
@@ -655,23 +671,42 @@
     /* =================/弹框类组件vue全局封装===================== */
 
     function post(url, body) {
-        var p = new Vue.Promise(function (resolve, reject) {
-            Vue.http.post(url, body).then(function (res) {
-                if (res.code !== '0' && res.code !== 0 && res.code !== 200) {
-                    resolve(res.body)
-                } else {
-                    reject(res.body)
-                }
-            }, function () {
-                reject({code: '99999999', message: '网络错误'})
-            })
+        var dfd = new $.Deferred();
+
+        Vue.http.post(url, body).then(function (res) {
+            var body = res.body
+            if (body.code !== '0' && body.code !== 0 && body.code !== 200) {
+                dfd.reject(body)
+            } else {
+                dfd.resolve(body)
+            }
+        }, function () {
+            dfd.reject({code: '99999999', message: '网络错误'})
         })
 
-        return p.promise
+        return dfd.promise()
     }
 
     window.Utils.post = post
 
+
+
+    $.ajaxSetup({
+        beforeSend: function (xhr, request) {
+            showLoading()
+        },
+
+        complete: function () {
+            hideLoading()
+        }
+    })
+
+    Vue.http.interceptors.push(function (request, next) {
+        showLoading();
+        next(function (response) {
+            hideLoading();
+        });
+    })
 
     // jquery ajax setting
 
@@ -692,33 +727,33 @@
     }
 
     /*// vue-resource v1.0.3 中才做下面配置
-    Vue.http.options.jsonp || Vue.http.interceptors.push(function (request, next) {
-        next(function (response) {
-            var body = response.body
-            if (body && body.code !== '0' && body.code !== 0 && body.code !== 200) {
-                Utils.tip({
-                    state: 'danger',
-                    content: body.message || '系统错误'
-                })
-            }
-        });
-    })
+     Vue.http.options.jsonp || Vue.http.interceptors.push(function (request, next) {
+     next(function (response) {
+     var body = response.body
+     if (body && body.code !== '0' && body.code !== 0 && body.code !== 200) {
+     Utils.tip({
+     state: 'danger',
+     content: body.message || '系统错误'
+     })
+     }
+     });
+     })
 
-    // vue-resource 0.＊版做下面配置
-    Vue.http.options.jsonp && Vue.http.interceptors.push({
-        request: function (request) {
-            return request
-        },
-        response: function (response) {
-            var body = response.data
-            if (body && body.code !== '0' && body.code !== 0 && body.code !== 200) {
-                Utils.tip({
-                    state: 'danger',
-                    content: body.message || '系统错误'
-                })
-            }
-            return response
-        }
-    })*/
+     // vue-resource 0.＊版做下面配置
+     Vue.http.options.jsonp && Vue.http.interceptors.push({
+     request: function (request) {
+     return request
+     },
+     response: function (response) {
+     var body = response.data
+     if (body && body.code !== '0' && body.code !== 0 && body.code !== 200) {
+     Utils.tip({
+     state: 'danger',
+     content: body.message || '系统错误'
+     })
+     }
+     return response
+     }
+     })*/
 
 })()
