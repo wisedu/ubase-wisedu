@@ -62,7 +62,7 @@ src/
 │   │   ├── page1.i18n.js // 国际化文件
 │   │   ├── pag1.vue // 主文件
 │   │   ├── page1.service.js //service
-│   │   └──page1.vuex.js // 状态文件
+│   │   └──page1.state.js // 状态文件
 │   ├── index.html  // 必须
 │   ├── routes.js  // 必须
 │   ├── config.json  // 必须
@@ -114,13 +114,13 @@ Vue.t('test.title')
 $t('test.title')
 ```
 
-## vuex
-直接写.vuex.js文件即可
+## state
+直接写.state.js文件即可
 在.vue文件中通过下面方式引用：
 ```
 computed: {
   ps(){
-    return this.$store.state.test // 此处对应获取的是test.vuex.js文件中的状态
+    return this.$store.state.test // 此处对应获取的是test.state.js文件中的状态
   }
 },
 ```
@@ -133,16 +133,16 @@ Ubase.invoke('vue.method' [, arg1, arg2...])
 其中vue为.vue文件的前缀， method为改vue中methods选项下的方法名。
 例如：如果要调用page1.vue的methods配置项中的reload方法，并传入一个参数3，则Ubase.invoke('page1.reload', '3')
 
-## 全局更新vuex状态
+## 全局更新state状态
 
 ```
-Ubase.updateState('vuex', {'title': 'helloworld'})
+Ubase.updateState('state', {'title': 'helloworld'})
 // or
-Ubase.updateState('vuex', {'info.name': '小明'})
+Ubase.updateState('state', {'info.name': '小明'})
 ```
 
-其中vuex为.vuex.js的前缀，表示要更新哪个vuex下的状态
-例如：如果要更新page1.vuex.js中的状态{info:{name:'zhangsan'}}，则Ubase.upateState('page1', {'info.name': 'xiaoming'})
+其中state为.state.js的前缀，表示要更新哪个state下的状态
+例如：如果要更新page1.state.js中的状态{info:{name:'zhangsan'}}，则Ubase.upateState('page1', {'info.name': 'xiaoming'})
 
 ## config.json配置项
 | 名称  | 描述 | 类型 | 默认值 | 备注 |
