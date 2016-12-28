@@ -37,7 +37,6 @@ ubase({
 | dest | 输出路径 | String | './www' |  |
 | port | 端口 | string | '8081' |  |
 | proxy | 代理 | Array | -- | { source: '/jcsj-apps-web', target: 'http://res.wisedu.com:8000' } |
-| useConfigFile | 是否使用独立config文件 | Boolean | false | 如果配置信息希望在单独的文件中，该属性设置为true， 并在index.html的同级目录添加config.json文件即可 |
 
 
 3、运行
