@@ -701,11 +701,24 @@
         }
     })
 
-    Vue.http.interceptors.push(function (request, next) {
+    // vue-resource v1.0.3 中才做下面配置
+    Vue.http.options.jsonp || Vue.http.interceptors.push(function (request, next) {
         showLoading();
         next(function (response) {
             hideLoading();
         });
+    })
+
+    // vue-resource 0.＊版做下面配置
+    Vue.http.options.jsonp && Vue.http.interceptors.push({
+        request: function (request) {
+            showLoading();
+            return request
+        },
+        response: function (response) {
+            hideLoading();
+            return response
+        }
     })
 
     // jquery ajax setting
