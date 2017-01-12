@@ -236,6 +236,9 @@ Utils.tip({
     content: '保存成功！',
     state: 'success',
 })
+
+// 缩写
+Utils.tip('success', '保存成功！')
 ```
 
 #### Properties
@@ -311,5 +314,10 @@ Utils.pop('close')
 
 ## 杂项
 
-### Utils.post(url, params)
+### ajax不显示laoding动画
 默认会有loading效果， 如果不需要, 则在params中添加参数_showLoading并置为false
+
+### 获取当前登陆用户信息
+```
+Utils.getUserInfo()
+```
