@@ -446,8 +446,15 @@
 
     /* =================弹框类组件vue全局封装===================== */
 
-    function tip(options) {
-        $.bhTip(options)
+    function tip(options, content) {
+        if (typeof options == 'string') {
+            $.bhTip({
+                state: options,
+                content: content
+            })
+        } else {
+            $.bhTip(options)
+        }
     }
 
     function toast(options, type) {
