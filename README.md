@@ -308,3 +308,8 @@ Utils.pop('close')
 | ready | 弹出成功回调 | Function | -- |  |
 | beforeClose | 关闭之前的回调 | Function | -- |  |
 | close | 关闭的回调 | Function | -- |  |
+
+## 杂项
+
+### Utils.post(url, params)
+默认会有loading效果， 如果不需要, 则在params中添加参数_showLoading并置为false

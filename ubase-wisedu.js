@@ -729,7 +729,12 @@
 
     // vue-resource v1.0.3 中才做下面配置
     Vue.http.options.jsonp || Vue.http.interceptors.push(function (request, next) {
-        showLoading();
+        if (request.body && request.body._showLoading !== false) {
+            delete request.body._showLoading
+            showLoading();
+        } else if (request.body && request.body._showLoading === false) {
+            delete request.body._showLoading
+        }
         next(function (response) {
             hideLoading();
         });
