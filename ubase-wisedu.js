@@ -52,11 +52,12 @@
 
         if (gConfig['APP_ID']) {
             $.ajax({
-                type: 'json',
+                dataType:'json',
+                type: 'post',
                 contentType: 'application/json',
                 data: {appId: gConfig['APP_ID']},
                 async: false,
-                url: '/portal/appFrameInfo'
+                url: '/portal/portal/appFrameInfo'
             }).done(function (res) {
                 var serverConfig = null
                 gUserInfo = res.datas.userInfo
@@ -215,7 +216,7 @@
     function setRouterAfterEach() {
         gRouter.afterEach(function (transition) {
             gCurrentRoute = transition.to.path.substr(1)
-            showLoading()
+            // showLoading()
 
             // 主菜单切换时， 隐藏内容区域，切换后的菜单内容组件渲染完成后会自动显示出来
             $('body>main>article>*').css('display', 'none')
@@ -447,6 +448,10 @@
     /* =================弹框类组件vue全局封装===================== */
 
     function tip(options, content) {
+        if (options === 'hide' || options === 'close') {
+            $('body>div.bh-tip').remove()
+            return
+        }
         if (typeof options == 'string') {
             $.bhTip({
                 state: options,
@@ -806,5 +811,7 @@
      return response
      }
      })*/
+
+    _.s = JSON.stringify
 
 })()
