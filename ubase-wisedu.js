@@ -61,7 +61,7 @@
             }).done(function (res) {
                 var serverConfig = null
                 gUserInfo = res.datas.userInfo
-                if (res.code == 0) {
+                if (res.code == 0 && gUserInfo) {
                     serverConfig = {
                         "BH_VERSION": "1.2",
                         "LANG": res.datas.locale || "cn",
