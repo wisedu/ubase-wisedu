@@ -50,6 +50,11 @@
 
         gConfig['BH_VERSION'] = gConfig['BH_VERSION'] || '1.2'
 
+        // 智校云管理平台主题色设置为橙色
+        if(location.href.indexOf('wecmp.wisedu.com')>0){
+            gConfig['THEME'] = 'yellow-fawn'
+        }
+
         if (gConfig['APP_ID']) {
             $.ajax({
                 dataType:'json',
@@ -679,8 +684,10 @@
     }
 
     function resetFooter() {
-        $.bhPaperPileDialog.resetPageFooter()
-        $.bhPaperPileDialog.resetDialogFooter()
+        Vue.nextTick(function () {
+            $.bhPaperPileDialog.resetPageFooter()
+            $.bhPaperPileDialog.resetDialogFooter()
+        })
     }
 
 
