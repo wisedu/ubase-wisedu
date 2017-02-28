@@ -22,6 +22,7 @@
     }
 
     window.Utils = {}
+    window.WIS_EMAP_CONFIG = {}
 
     /* =================APP loading动画===================== */
     var loadingCss = '.app-ajax-loading .bh-loader-icon-line-border{border: 0px solid #ddd;box-shadow:none;}.app-ajax-loading{position:fixed;z-index:30000;}.app-loading{position:fixed;opacity:0;top:150px;left:-75px;margin-left:50%;z-index:-1;text-align:center}.app-loading-show{z-index:999999;animation:fade-in;animation-duration:0.5s;-webkit-animation:fade-in 0.5s;opacity:1;}@keyframes fade-in{0%{opacity:0}50%{opacity:.4}100%{opacity:1}}@-webkit-keyframes fade-in{0%{opacity:0}50%{opacity:.4}100%{opacity:1}}.spinner>div{width:30px;height:30px;background-color:#4DAAF5;border-radius:100%;display:inline-block;-webkit-animation:bouncedelay 1.4s infinite ease-in-out;animation:bouncedelay 1.4s infinite ease-in-out;-webkit-animation-fill-mode:both;animation-fill-mode:both}.spinner .bounce1{-webkit-animation-delay:-.32s;animation-delay:-.32s}.spinner .bounce2{-webkit-animation-delay:-.16s;animation-delay:-.16s}@-webkit-keyframes bouncedelay{0%,100%,80%{-webkit-transform:scale(0)}40%{-webkit-transform:scale(1)}}@keyframes bouncedelay{0%,100%,80%{transform:scale(0);-webkit-transform:scale(0)}40%{transform:scale(1);-webkit-transform:scale(1)}}'
@@ -726,7 +727,7 @@
             } else {
                 dfd.resolve(body)
             }
-        }, function () {
+        }, function (res) {
             dfd.reject({code: '99999999', message: '网络错误'})
         })
 
@@ -821,4 +822,19 @@
 
     _.s = JSON.stringify
 
+    /*----------- start 智校云管理平台定制处理----------- */
+    Vue.http.options.jsonp || Vue.http.interceptors.push(function (request, next) {
+        next(function (response) {
+            if(response.body['unauthorizedAjax-d3472c24-cc96-47ba-9498-27aaf2692cd3'] == '500'){
+                window.parent.location.href = './login.html'
+            }
+        });
+    })
+
+    WIS_EMAP_CONFIG.dataTableAjaxCompleteCallback = function(res){
+        if(res['unauthorizedAjax-d3472c24-cc96-47ba-9498-27aaf2692cd3'] == '500'){
+            window.parent.location.href = './login.html'
+        }
+    }
+    /*----------- end 智校云管理平台定制处理----------- */
 })()
