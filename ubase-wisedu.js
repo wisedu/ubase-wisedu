@@ -31,6 +31,8 @@
     style.innerText = loadingCss
     document.getElementsByTagName('head')[0].appendChild(style)
     $('body').append('  <div class="app-ajax-loading" style="position:fixed;z-index:30000;background-color:rgba(0,0,0,0);"></div><div class="app-loading"><div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div>')
+    $('body>head').append('<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">')
+    $('body>head').append('<meta name="renderer" content="webkit"><meta name="force-rendering" content="webkit">')
 
     function showLoading() {
         $('.app-loading').addClass('app-loading-show')
@@ -50,23 +52,27 @@
         gRouter = transition.router
 
         gConfig['BH_VERSION'] = gConfig['BH_VERSION'] || '1.2'
+        gConfig['HEADER'] = {}
 
         // 智校云管理平台主题色设置为橙色
         if(location.href.indexOf('wecmp.wisedu.com')>0){
             gConfig['THEME'] = 'yellow-fawn'
         }
 
-        if (gConfig['APP_ID']) {
+         if (!gConfig['DEBUG']) {
             $.ajax({
                 dataType:'json',
                 type: 'post',
                 contentType: 'application/json',
-                data: {appId: gConfig['APP_ID']},
+                data: {openUrl: '://'+location.host+location.pathname},
                 async: false,
                 url: '/portal/portal/appFrameInfo'
             }).done(function (res) {
                 var serverConfig = null
                 gUserInfo = res.datas.userInfo
+                if(res.datas.appName){
+                    gConfig['APP_NAME'] = res.datas.appName
+                }
                 if (res.code == 0 && gUserInfo) {
                     serverConfig = {
                         "BH_VERSION": "1.2",
@@ -75,13 +81,14 @@
                             "logo": res.datas.logo || "http://res.wisedu.com/scenes/public/images/demo/logo.png",
                             "userImage": res.datas.userInfo.userAvatar || "http://res.wisedu.com/scenes/public/images/demo/user1.png",
                             "userInfo": {
+                                logoutHref: res.datas.logoutUrl,
                                 "image": res.datas.userInfo.userAvatar || "http://res.wisedu.com/scenes/public/images/demo/user1.png",
                                 "info": [
-                                    res.datas.userInfo.userAccount,
-                                    res.datas.userInfo.userName + " " + res.datas.userInfo.userGender,
-                                    res.datas.userInfo.userDepartment,
-                                    res.datas.userInfo.userEmail,
-                                    res.datas.userInfo.userCellPhone
+                                    res.datas.userInfo.userAccount||'',
+                                    (res.datas.userInfo.userName||'') + " " + (res.datas.userInfo.userGender||''),
+                                    res.datas.userInfo.userDepartment||'',
+                                    res.datas.userInfo.userEmail||'',
+                                    res.datas.userInfo.userCellPhone||''
                                 ]
                             }
                         }
@@ -144,7 +151,7 @@
                 '/fe_components/amp/ampPlugins.min.js',
                 '/fe_components/jqwidget/globalize.js',
                 '/bower_components/jquery.nicescroll/jquery.nicescroll.min.js',
-                '/bower_components/moment/min/moment-with-locales.min.js'
+                '/fe_components/bhtc/moment/min/moment-with-locales.min.js'
             ],
 
             'PUBLIC_NORMAL_JS': [
