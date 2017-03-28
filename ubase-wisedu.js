@@ -147,16 +147,16 @@
 
             'PUBLIC_BASE_JS': [
                 '/fe_components/bh_utils.js',
-                gConfig['DEBUG'] === true ? '/fe_components/emap{{version}}.js' : '/fe_components/emap{{version}}.min.js',
+                '/fe_components/jqwidget/jqxwidget.min.js',
                 '/fe_components/amp/ampPlugins.min.js',
                 '/fe_components/jqwidget/globalize.js',
+                gConfig['DEBUG'] === true ? '/fe_components/emap{{version}}.js' : '/fe_components/emap{{version}}.min.js',
                 '/bower_components/jquery.nicescroll/jquery.nicescroll.min.js',
                 '/fe_components/bhtc/moment/min/moment-with-locales.min.js'
             ],
 
             'PUBLIC_NORMAL_JS': [
                 gConfig['DEBUG'] === true ? '/fe_components/bh{{version}}.js' : '/fe_components/bh{{version}}.min.js',
-                '/fe_components/jqwidget/jqxwidget.min.js',
                 '/fe_components/mock/getmock.js'
             ]
         }
