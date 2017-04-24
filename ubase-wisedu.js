@@ -55,8 +55,12 @@
         gConfig['HEADER'] = {}
 
         // 智校云管理平台主题色设置为橙色
-        if(location.href.indexOf('wecmp.wisedu.com')>0){
+        if(location.href.indexOf('wecmp.wisedu.com')>0 || location.href.indexOf('wecmp.cpdaily.com')>0){
             gConfig['THEME'] = 'yellow-fawn'
+        }
+
+        if(location.host.indexOf('cpdaily.com') !== -1 || location.host.indexOf('wisedu.com') !== -1){
+            gConfig['RESOURCE_SERVER'] = 'http://feres.cpdaily.com'
         }
 
          if (!gConfig['DEBUG']) {
