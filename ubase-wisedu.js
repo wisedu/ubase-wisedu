@@ -59,7 +59,7 @@
             gConfig['THEME'] = 'yellow-fawn'
         }
 
-        if(location.host.indexOf('cpdaily.com') !== -1 || location.host.indexOf('wisedu.com') !== -1){
+        if(location.host.indexOf('localhost') === -1 && location.host.indexOf('172.') === -1){
             gConfig['RESOURCE_SERVER'] = 'http://feres.cpdaily.com'
         }
 
@@ -836,14 +836,14 @@
     /*----------- start 智校云管理平台定制处理----------- */
     Vue.http.options.jsonp || Vue.http.interceptors.push(function (request, next) {
         next(function (response) {
-            if(response.body['unauthorizedAjax-d3472c24-cc96-47ba-9498-27aaf2692cd3'] == '500'){
+            if(response.body && response.body['unauthorizedAjax-d3472c24-cc96-47ba-9498-27aaf2692cd3'] == '500'){
                 window.parent.location.href = './login.html'
             }
         });
     })
 
     WIS_EMAP_CONFIG.dataTableAjaxCompleteCallback = function(res){
-        if(res['unauthorizedAjax-d3472c24-cc96-47ba-9498-27aaf2692cd3'] == '500'){
+        if(res && res['unauthorizedAjax-d3472c24-cc96-47ba-9498-27aaf2692cd3'] == '500'){
             window.parent.location.href = './login.html'
         }
     }
