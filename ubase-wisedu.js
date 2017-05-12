@@ -63,7 +63,7 @@
             gConfig['RESOURCE_SERVER'] = 'http://feres.cpdaily.com'
         }
 
-         if (!gConfig['DEBUG']) {
+         if (!gConfig['DEBUG'] && location.host.indexOf('localhost') === -1 ) {
             $.ajax({
                 dataType:'json',
                 type: 'post',
