@@ -63,6 +63,22 @@
             gConfig['RESOURCE_SERVER'] = 'http://feres.cpdaily.com'
         }
 
+        /**  私有云换肤处理 **/
+        var platformConfig = localStorage.getItem("schoolConfig");
+        var newSkin = localStorage.getItem("skinName");
+
+        if (platformConfig) {
+            if (platformConfig.skin) {
+                config['THEME'] = platformConfig.skin;
+            }
+        }
+
+        if(newSkin){
+            config['THEME'] = newSkin;
+        }
+
+        /*** end 私有云换肤处理  ***/
+
          if (!gConfig['DEBUG'] && location.host.indexOf('localhost') === -1 ) {
             $.ajax({
                 dataType:'json',
