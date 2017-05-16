@@ -66,17 +66,21 @@
         /**  私有云换肤处理 **/
         var platformConfig = localStorage.getItem("schoolConfig");
         var newSkin = localStorage.getItem("skinName");
+        var userParams = getUserParams()
 
         if (platformConfig) {
             if (platformConfig.skin) {
-                config['THEME'] = platformConfig.skin;
+                gConfig['THEME'] = platformConfig.skin;
             }
         }
 
         if(newSkin){
-            config['THEME'] = newSkin;
+            gConfig['THEME'] = newSkin;
         }
 
+        if(userParams.THEME){
+            gConfig['THEME'] = userParams.THEME;
+        }
         /*** end 私有云换肤处理  ***/
 
          if (!gConfig['DEBUG'] && location.host.indexOf('localhost') === -1 ) {
