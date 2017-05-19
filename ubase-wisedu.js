@@ -83,7 +83,7 @@
         }
         /*** end 私有云换肤处理  ***/
 
-         if (!gConfig['DEBUG'] && location.host.indexOf('localhost') === -1 ) {
+         if (location.host.indexOf('localhost') === -1 ) {
             $.ajax({
                 dataType:'json',
                 type: 'post',
@@ -859,6 +859,10 @@
             if(response.body && response.body['unauthorizedAjax-d3472c24-cc96-47ba-9498-27aaf2692cd3'] == '500'){
                 window.parent.location.href = './login.html'
             }
+
+            if(response.body && response.body.datas && !response.body.datas['WEC-HASLOGIN'] && response.body.datas['WEC-REDIRECTURL']){
+                window.top.location.href = response.body.datas['WEC-REDIRECTURL']
+            }
         });
     })
 
@@ -866,6 +870,11 @@
         if(res && res['unauthorizedAjax-d3472c24-cc96-47ba-9498-27aaf2692cd3'] == '500'){
             window.parent.location.href = './login.html'
         }
+
+        if(res.body && res.body.datas && !res.body.datas['WEC-HASLOGIN'] && res.body.datas['WEC-REDIRECTURL']){
+            window.top.location.href = res.body.datas['WEC-REDIRECTURL']
+        }
     }
     /*----------- end 智校云管理平台定制处理----------- */
+
 })()
