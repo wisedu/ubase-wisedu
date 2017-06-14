@@ -60,7 +60,7 @@
         }
 
         if(location.host.indexOf('localhost') === -1 && location.host.indexOf('172.') === -1){
-            gConfig['RESOURCE_SERVER'] = 'http://feres.cpdaily.com'
+            gConfig['RESOURCE_SERVER'] = 'https://feres.cpdaily.com'
         }
 
         /**  私有云换肤处理 **/
@@ -92,6 +92,7 @@
                 async: false,
                 url: '/portal/portal/appFrameInfo'
             }).done(function (res) {
+                var cdn = getCdn()
                 var serverConfig = null
                 gUserInfo = res.datas.userInfo
                 if(res.datas.appName){
@@ -102,11 +103,11 @@
                         "BH_VERSION": "1.2",
                         "LANG": res.datas.locale || "cn",
                         "HEADER": {
-                            "logo": res.datas.logo || "http://res.wisedu.com/scenes/public/images/demo/logo.png",
-                            "userImage": res.datas.userInfo.userAvatar || "http://res.wisedu.com/scenes/public/images/demo/user1.png",
+                            "logo": res.datas.logo || cdn+"/scenes/public/images/demo/logo.png",
+                            "userImage": res.datas.userInfo.userAvatar || cdn+"/scenes/public/images/demo/user1.png",
                             "userInfo": {
                                 logoutHref: res.datas.logoutUrl,
-                                "image": res.datas.userInfo.userAvatar || "http://res.wisedu.com/scenes/public/images/demo/user1.png",
+                                "image": res.datas.userInfo.userAvatar || cdn+"/scenes/public/images/demo/user1.png",
                                 "info": [
                                     res.datas.userInfo.userAccount||'',
                                     (res.datas.userInfo.userName||'') + " " + (res.datas.userInfo.userGender||''),
@@ -745,6 +746,7 @@
     window.Utils.pop = pop
     window.Utils.resetFooter = resetFooter
     window.Utils.getUserInfo = getUserInfo
+    window.Utils.getUserParams = getUserParams
 
     /* =================/弹框类组件vue全局封装===================== */
 
