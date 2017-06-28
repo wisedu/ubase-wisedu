@@ -2,6 +2,11 @@
 
 ## 框架使用方式
 
+0、脚手架生成项目的安装
+```
+npm i --registry=https://registry.npm.taobao.org --sass-binary-site=http://res.wisedu.com/FS/tools
+```
+
 1、安装及更新
 ```
 npm i ubase-vue --save --registry=https://registry.npm.taobao.org --sass-binary-site=http://res.wisedu.com/FS/tools
