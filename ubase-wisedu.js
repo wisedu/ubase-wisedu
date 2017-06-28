@@ -61,7 +61,7 @@
 
         if(location.host.indexOf('localhost') === -1 && location.host.indexOf('172.') === -1){
             gConfig['RESOURCE_SERVER'] = 'https://feres.cpdaily.com'
-        }描述
+        }
 
         /**  私有云换肤处理 **/
         var platformConfig = localStorage.getItem("schoolConfig");
@@ -767,7 +767,25 @@
         return dfd.promise()
     }
 
+    function get(url, body) {
+        var dfd = new $.Deferred();
+
+        Vue.http.get(url, {params:body}).then(function (res) {
+            var body = res.body
+            if (body.code !== '0' && body.code !== 0 && body.code !== 200) {
+                dfd.reject(body)
+            } else {
+                dfd.resolve(body)
+            }
+        }, function (res) {
+            dfd.reject({code: '99999999', message: '网络错误'})
+        })
+
+        return dfd.promise()
+    }
+
     window.Utils.post = post
+    window.Utils.get = get
 
 
     $.ajaxSetup({
