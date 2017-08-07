@@ -57,6 +57,7 @@
         // 智校云管理平台主题色设置为橙色
         if(location.href.indexOf('wecmp.wisedu.com')>0 || location.href.indexOf('wecmp.cpdaily.com')>0){
             gConfig['THEME'] = 'blue'
+            document.body.style.color='#657180'
         }
 
         if(location.host.indexOf('localhost') === -1 && location.host.indexOf('172.') === -1){
@@ -183,7 +184,10 @@
             'PUBLIC_NORMAL_JS': [
                 gConfig['DEBUG'] === true ? '/fe_components/bh{{version}}.js' : '/fe_components/bh{{version}}.min.js',
                 '/fe_components/mock/getmock.js'
-            ]
+            ],
+            "IE_SHIV_CSS": [
+            '/fe_components/jqwidget/{{theme}}/bh-ie.css'
+        ]
         }
         return resource
     }
@@ -416,11 +420,19 @@
         var config = gConfig
         var cdn = getCdn()
         var publicCss = gResource['PUBLIC_CSS']
+        var ieShivCss = gResource['IE_SHIV_CSS']
+
         var bhVersion = config['BH_VERSION']
         var version = bhVersion ? ('-' + bhVersion) : ''
         var theme = config['THEME'] || 'blue'
         var regEx = /fe_components|bower_components/
         var cssUrl = []
+        var currentBrowserVersion = getIEVersion();
+
+        if (currentBrowserVersion && currentBrowserVersion == 9) {
+          publicCss = publicCss.concat(ieShivCss);
+        }
+
 
         for (var i = 0; i < publicCss.length; i++) {
             var url = addTimestamp(publicCss[i])
@@ -480,6 +492,31 @@
         var resourceVersion = gResource['RESOURCE_VERSION'] || (+new Date())
 
         return url + '?rv=' + resourceVersion
+    }
+
+    function getIEVersion(){
+      var version = null;
+      if (navigator.userAgent.indexOf("MSIE") > 0) {
+        if (navigator.userAgent.indexOf("MSIE 6.0") > 0) {
+          version = 6;
+        }
+        if (navigator.userAgent.indexOf("MSIE 7.0") > 0) {
+          version = 7;
+        }
+        if (navigator.userAgent.indexOf("MSIE 9.0") > 0 && !window.innerWidth) {
+          version = 8;
+        }
+        if (navigator.userAgent.indexOf("MSIE 9.0") > 0) {
+          version = 9;
+        }
+        if (navigator.userAgent.indexOf("MSIE 10.0") > 0) {
+          version = 10;
+        }
+
+
+      }
+
+      return version;
     }
 
 
