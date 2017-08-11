@@ -627,11 +627,13 @@
 
     }
 
-    function paperDialog(options) {
+    function paperDialog(options, data) {
         var dialogRef = gRouter.app.$refs.ubase_paperdialog
         if (options === 'hide' || options === 'close') {
-            $.bhPaperPileDialog.hide()
-            dialogRef && dialogRef.$destroy(false, true)
+            $.bhPaperPileDialog.hide(data)
+            setTimeout(function(){
+                dialogRef && dialogRef.$destroy(false, true)
+            },750)
             return
         }
 
@@ -653,6 +655,9 @@
                 })
             },
             close: function () {
+                if(options.close && typeof options.close == 'function'){
+                    options.close()
+                }
                 dialogRef = gRouter.app.$refs.ubase_paperdialog
                 dialogRef && dialogRef.$destroy(false, true)
             }

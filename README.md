@@ -178,6 +178,7 @@ Utils.paperDialog('close')
 | ---    | ---   | ---   | ---     | ---   |
 | currentView | 组件名称 | String | '' | 纸质弹框中需要显示的vue组件名称（框架通过动态组件加载）|
 | title | 弹框标题 | String | -- | 如果动态组件中未设置h2标题，则弹框的标题为该title |
+| close | 关闭事件 | Function | -- | 关闭弹框的回调事件 |
 
 ### 属性弹框
 
