@@ -660,6 +660,13 @@
                 }
                 dialogRef = gRouter.app.$refs.ubase_paperdialog
                 dialogRef && dialogRef.$destroy(false, true)
+            },
+            closeBefore:function () {
+                if(options.closeBefore && typeof options.closeBefore == 'function'){
+                    return options.closeBefore()
+                }else{
+                    return true
+                }
             }
         })
     }
