@@ -55,12 +55,12 @@
         gConfig['HEADER'] = {}
 
         // 智校云管理平台主题色设置为橙色
-        if(location.href.indexOf('wecmp.wisedu.com')>0 || location.href.indexOf('wecmp.cpdaily.com')>0){
+        if (location.href.indexOf('wecmp.wisedu.com') > 0 || location.href.indexOf('wecmp.cpdaily.com') > 0) {
             gConfig['THEME'] = 'blue'
-            document.body.style.color='#657180'
+            document.body.style.color = '#657180'
         }
 
-        if(location.host.indexOf('localhost') === -1 && location.host.indexOf('172.') === -1){
+        if (location.host.indexOf('localhost') === -1 && location.host.indexOf('172.') === -1) {
             gConfig['RESOURCE_SERVER'] = 'https://feres.cpdaily.com'
         }
 
@@ -75,28 +75,28 @@
             }
         }
 
-        if(newSkin){
+        if (newSkin) {
             gConfig['THEME'] = newSkin;
         }
 
-        if(userParams.THEME){
+        if (userParams.THEME) {
             gConfig['THEME'] = userParams.THEME;
         }
         /*** end 私有云换肤处理  ***/
 
-         if (location.host.indexOf('localhost') === -1 ) {
+        if (location.host.indexOf('localhost') === -1 && gConfig['appFrameInfo'] !== false) {
             $.ajax({
-                dataType:'json',
+                dataType: 'json',
                 type: 'post',
                 contentType: 'application/json',
-                data: {openUrl: '://'+location.host+location.pathname},
+                data: {openUrl: '://' + location.host + location.pathname},
                 async: false,
                 url: '/portal/portal/appFrameInfo'
             }).done(function (res) {
                 var cdn = getCdn()
                 var serverConfig = null
                 gUserInfo = res.datas.userInfo
-                if(res.datas.appName){
+                if (res.datas.appName) {
                     gConfig['APP_NAME'] = res.datas.appName
                 }
                 if (res.code == 0 && gUserInfo) {
@@ -104,17 +104,17 @@
                         "BH_VERSION": "1.2",
                         "LANG": res.datas.locale || "cn",
                         "HEADER": {
-                            "logo": res.datas.logo || cdn+"/scenes/public/images/demo/logo.png",
-                            "userImage": res.datas.userInfo.userAvatar || cdn+"/scenes/public/images/demo/user1.png",
+                            "logo": res.datas.logo || cdn + "/scenes/public/images/demo/logo.png",
+                            "userImage": res.datas.userInfo.userAvatar || cdn + "/scenes/public/images/demo/user1.png",
                             "userInfo": {
                                 logoutHref: res.datas.logoutUrl,
-                                "image": res.datas.userInfo.userAvatar || cdn+"/scenes/public/images/demo/user1.png",
+                                "image": res.datas.userInfo.userAvatar || cdn + "/scenes/public/images/demo/user1.png",
                                 "info": [
-                                    res.datas.userInfo.userAccount||'',
-                                    (res.datas.userInfo.userName||'') + " " + (res.datas.userInfo.userGender||''),
-                                    res.datas.userInfo.userDepartment||'',
-                                    res.datas.userInfo.userEmail||'',
-                                    res.datas.userInfo.userCellPhone||''
+                                    res.datas.userInfo.userAccount || '',
+                                    (res.datas.userInfo.userName || '') + " " + (res.datas.userInfo.userGender || ''),
+                                    res.datas.userInfo.userDepartment || '',
+                                    res.datas.userInfo.userEmail || '',
+                                    res.datas.userInfo.userCellPhone || ''
                                 ]
                             }
                         }
@@ -122,6 +122,7 @@
                 }
                 gConfig = $.extend(true, {}, gConfig, serverConfig)
             })
+
         }
 
         gResource = getResource()
@@ -186,8 +187,8 @@
                 '/fe_components/mock/getmock.js'
             ],
             "IE_SHIV_CSS": [
-            '/fe_components/jqwidget/{{theme}}/bh-ie.css'
-        ]
+                '/fe_components/jqwidget/{{theme}}/bh-ie.css'
+            ]
         }
         return resource
     }
@@ -430,7 +431,7 @@
         var currentBrowserVersion = getIEVersion();
 
         if (currentBrowserVersion && currentBrowserVersion == 9) {
-          publicCss = publicCss.concat(ieShivCss);
+            publicCss = publicCss.concat(ieShivCss);
         }
 
 
@@ -494,29 +495,29 @@
         return url + '?rv=' + resourceVersion
     }
 
-    function getIEVersion(){
-      var version = null;
-      if (navigator.userAgent.indexOf("MSIE") > 0) {
-        if (navigator.userAgent.indexOf("MSIE 6.0") > 0) {
-          version = 6;
-        }
-        if (navigator.userAgent.indexOf("MSIE 7.0") > 0) {
-          version = 7;
-        }
-        if (navigator.userAgent.indexOf("MSIE 9.0") > 0 && !window.innerWidth) {
-          version = 8;
-        }
-        if (navigator.userAgent.indexOf("MSIE 9.0") > 0) {
-          version = 9;
-        }
-        if (navigator.userAgent.indexOf("MSIE 10.0") > 0) {
-          version = 10;
-        }
+    function getIEVersion() {
+        var version = null;
+        if (navigator.userAgent.indexOf("MSIE") > 0) {
+            if (navigator.userAgent.indexOf("MSIE 6.0") > 0) {
+                version = 6;
+            }
+            if (navigator.userAgent.indexOf("MSIE 7.0") > 0) {
+                version = 7;
+            }
+            if (navigator.userAgent.indexOf("MSIE 9.0") > 0 && !window.innerWidth) {
+                version = 8;
+            }
+            if (navigator.userAgent.indexOf("MSIE 9.0") > 0) {
+                version = 9;
+            }
+            if (navigator.userAgent.indexOf("MSIE 10.0") > 0) {
+                version = 10;
+            }
 
 
-      }
+        }
 
-      return version;
+        return version;
     }
 
 
@@ -631,9 +632,9 @@
         var dialogRef = gRouter.app.$refs.ubase_paperdialog
         if (options === 'hide' || options === 'close') {
             $.bhPaperPileDialog.hide(data)
-            setTimeout(function(){
+            setTimeout(function () {
                 dialogRef && dialogRef.$destroy(false, true)
-            },750)
+            }, 750)
             return
         }
 
@@ -655,16 +656,16 @@
                 })
             },
             close: function () {
-                if(options.close && typeof options.close == 'function'){
+                if (options.close && typeof options.close == 'function') {
                     options.close()
                 }
                 dialogRef = gRouter.app.$refs.ubase_paperdialog
                 dialogRef && dialogRef.$destroy(false, true)
             },
-            closeBefore:function () {
-                if(options.closeBefore && typeof options.closeBefore == 'function'){
+            closeBefore: function () {
+                if (options.closeBefore && typeof options.closeBefore == 'function') {
                     return options.closeBefore()
-                }else{
+                } else {
                     return true
                 }
             }
@@ -786,6 +787,8 @@
         return gUserInfo
     }
 
+    Vue.http.headers.get = {'Content-Type': 'application/json'}
+
     // recommend
     window.Utils.paperDialog = paperDialog
     window.Utils.propertyDialog = propertyDialog
@@ -819,7 +822,7 @@
     function get(url, body) {
         var dfd = new $.Deferred();
 
-        Vue.http.get(url, {params:body}).then(function (res) {
+        Vue.http.get(url, {params: body}).then(function (res) {
             var body = res.body
             if (body.code !== '0' && body.code !== 0 && body.code !== 200) {
                 dfd.reject(body)
@@ -925,22 +928,22 @@
     /*----------- start 智校云管理平台定制处理----------- */
     Vue.http.options.jsonp || Vue.http.interceptors.push(function (request, next) {
         next(function (response) {
-            if(response.body && response.body['unauthorizedAjax-d3472c24-cc96-47ba-9498-27aaf2692cd3'] == '500'){
+            if (response.body && response.body['unauthorizedAjax-d3472c24-cc96-47ba-9498-27aaf2692cd3'] == '500') {
                 window.parent.location.href = './login.html'
             }
 
-            if(response.body && response.body.datas && !response.body.datas['WEC-HASLOGIN'] && response.body.datas['WEC-REDIRECTURL']){
+            if (response.body && response.body.datas && !response.body.datas['WEC-HASLOGIN'] && response.body.datas['WEC-REDIRECTURL']) {
                 window.top.location.href = response.body.datas['WEC-REDIRECTURL']
             }
         });
     })
 
-    WIS_EMAP_CONFIG.dataTableAjaxCompleteCallback = function(res){
-        if(res && res['unauthorizedAjax-d3472c24-cc96-47ba-9498-27aaf2692cd3'] == '500'){
+    WIS_EMAP_CONFIG.dataTableAjaxCompleteCallback = function (res) {
+        if (res && res['unauthorizedAjax-d3472c24-cc96-47ba-9498-27aaf2692cd3'] == '500') {
             window.parent.location.href = './login.html'
         }
 
-        if(res.body && res.body.datas && !res.body.datas['WEC-HASLOGIN'] && res.body.datas['WEC-REDIRECTURL']){
+        if (res.body && res.body.datas && !res.body.datas['WEC-HASLOGIN'] && res.body.datas['WEC-REDIRECTURL']) {
             window.top.location.href = res.body.datas['WEC-REDIRECTURL']
         }
     }
