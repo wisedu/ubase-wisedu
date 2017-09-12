@@ -57,7 +57,6 @@
         // 智校云管理平台主题色设置为橙色
         if (location.href.indexOf('wecmp.wisedu.com') > 0 || location.href.indexOf('wecmp.cpdaily.com') > 0) {
             gConfig['THEME'] = 'blue'
-            document.body.style.color = '#657180'
         }
 
         if (location.host.indexOf('localhost') === -1 && location.host.indexOf('172.') === -1) {
