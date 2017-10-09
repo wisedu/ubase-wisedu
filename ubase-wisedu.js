@@ -42,6 +42,9 @@
         $('.app-loading').removeClass('app-loading-show')
     }
 
+    window.Ubase.showLoading = showLoading
+    window.Ubase.hideLoading = hideLoading
+
     /* =================/APP loading动画===================== */
 
     window.Ubase.beforeInit = function (transition) {
@@ -130,6 +133,9 @@
         loadCss()
 
         loadJs(function () {
+            if(window.Ubase.preInit){
+                window.Ubase.preInit()
+            }
             hideLoading()
             afterLoadResource()
             transition.next()
@@ -879,6 +885,7 @@
     $.ajaxSettings.contentType = 'application/json'
 
     var originParamMethod = $.param
+    $.originParamMethod = originParamMethod
 
     // 如果是get请求 则按原来方式处理 如果是post请求 则序列化为json字符串
     $.param = function (data, traditinal, source) {
